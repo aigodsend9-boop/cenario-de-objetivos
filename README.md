@@ -1,78 +1,80 @@
 # Cenário de Objetivos — Threat Model e Protocolo de Testes Agênticos (2026)
 
-> Documentação de ameaça e protocolo de **red team autorizado** para enclaves agênticos autônomos.
-> Todos os testes descritos rodam contra **sistemas próprios** ou ambientes de homologação sob charter formal.
+> Documentação de ameaça, revisão da literatura e protocolo de **red team autorizado** para enclaves agênticos autônomos.
+> Todos os testes descritos rodam exclusivamente contra **sistemas próprios** ou ambientes de homologação sob charter formal ([`experiments/charter-template.md`](experiments/charter-template.md)).
 > Este repositório **não contém** payloads operacionais nem instruções contra sistemas de terceiros.
 
-## Tese central
+---
 
-O atacante sofisticado de 2026 não ataca o software nem o prompt — ataca a **paisagem de objetivos** (*objective landscape*), os **oráculos de avaliação** e a **memória persistente**. Agentes bem-intencionados, convergindo sobre o mesmo atrator, executam estados danosos sem qualquer canal de comunicação. O Nível 2 (Parte V) leva a regressão ao limite: **quem controla o critério controla o sistema** — do oráculo de runtime até o safety case de certificação.
+## Tese Central e Disciplina Epistêmica
 
-## Conteúdo
+A avaliação de segurança de sistemas agênticos em 2026 exige separar rigorosamente **fatos empíricos verificados** (`[Verificado]`), **extrapolações de arquitetura** (`[Plausível]`) e **cenários condicionais futuros** (`[Cenário Prospectivo]`):
 
-| Documento | Descrição | Status (29/09/2026) |
+1. **Piso de Risco Não-Diversificável (`[Verificado]` — Ross et al., `arXiv:2609.04373`):** Quando $N$ agentes compartilham distribuições de pré-treinamento e RLHF, a correlação média residual $\bar{\rho} > 0$ impõe um piso de variância agregada $\lim_{N\to\infty}\text{Var}(\bar{e}) = \bar{\rho}\,\sigma^2$ que a mera adição de agentes ou troca de provedores não elimina.
+2. **Subversão da Paisagem de Objetivos (`[Verificado em Benchmarks]`):** Agentes otimizadores convergem para atalhos de especificação em oráculos de avaliação (`arXiv:2606.15385`, `arXiv:2609.04170`), triagem assimétrica (*PuzzleMask*) e memória persistente.
+3. **Superfície e Metabolismo Operacional (`[Verificado em Incidentes / PoCs]`):** Campanhas e pesquisas de 2026 demonstram persistência por sobrescrita de arquivos de instrução `SOUL.md` (botnet **CARBONATO**, ago/2026), propagação adaptativa em laboratório (`arXiv:2606.03811`), cadeias de vulnerabilidades em frameworks locais (`arXiv:2604.04759`) e riscos de redirecionamento em protocolos de pagamento máquina-a-máquina (`x402`).
+
+---
+
+## Conteúdo do Repositório
+
+| Documento / Artefato | Descrição | Status (29/09/2026) |
 |---|---|---|
-| [`docs/00-ensaio-colusao-gradiente.md`](docs/00-ensaio-colusao-gradiente.md) | Ensaio-semente: *A Colusão por Convergência de Gradiente* — ausência de canal, infraestrutura crítica como alvo passivo (BGP/DNS/CDN) e o prompt injection inscrito nos pesos | ✅ consolidado |
-| [`docs/01-pesquisa-fontes.md`](docs/01-pesquisa-fontes.md) | Pesquisa de base com ~30 fontes verificadas: convergência sem canal, monocultura, capability paradox, homogenização, risco sistêmico | ✅ fontes verificadas |
-| [`docs/02-threat-model.md`](docs/02-threat-model.md) | Threat model completo — Partes I–V: 6 vetores (Nível 1), protocolo de testes 1–6, blueprint defensivo, mapeamento OWASP/ATLAS, Horizonte H1–H4 (Nível 2) + testes 7–10 | ✅ v2 + Parte V |
-| [`docs/03-kill-chain-metabolismo-agentico.md`](docs/03-kill-chain-metabolismo-agentico.md) | O Novo Kill Chain Agêntico (36 dias / 13 de 14 táticas ATT&CK) e Autopoiese Ofensiva: CARBONATO, Worm de Toronto, ClawHub, x402/USDC e Contra-Invariantes 12–15 | ✅ consolidado |
-| [`experiments/plano-de-experimentos.md`](experiments/plano-de-experimentos.md) | Protocolo executável dos Testes 1–10: pré-requisitos, harness, fórmulas, calibração de limiares (μ+3σ), salvaguardas, schema de registro | 🚧 v0.1 |
-| [`experiments/backlog.md`](experiments/backlog.md) | Backlog por fases (Fase 0 → primeiro relatório) | 🚧 v0.1 |
+| [`docs/00-ensaio-colusao-gradiente.md`](docs/00-ensaio-colusao-gradiente.md) | Formulação matemática ($\text{Var}(\bar{e}) \to \bar{\rho}\sigma^2$), distinção entre contágio com canal (`arXiv:2609.04170`) e convergência sem canal (`arXiv:2606.15385`), e separação entre fato operacional e cenário prospectivo em BGP/DNS/CDN | ✅ v2 (auditado com rótulos epistêmicos) |
+| [`docs/01-pesquisa-fontes.md`](docs/01-pesquisa-fontes.md) | Auditoria bibliográfica com mais de 30 fontes verificadas: colusão tácita, reward hacking, colapso representacional, monocultura e kill chain agêntico | ✅ fontes verificadas |
+| [`docs/02-threat-model.md`](docs/02-threat-model.md) | Threat Model completo — Partes I–V: Vetores 1–6 (Nível 1), Horizonte H1–H4 (Nível 2), Contra-Invariantes 1–11 e mapeamento OWASP Agentic Top 10 / MITRE ATLAS | ✅ v2 + Parte V |
+| [`docs/03-kill-chain-metabolismo-agentico.md`](docs/03-kill-chain-metabolismo-agentico.md) | Análise técnica de CARBONATO (`SOUL.md`), Worm Adaptativo (`arXiv:2606.03811`), OpenClaw (`arXiv:2604.04759`), protocolo `x402` e Contra-Invariantes 12–15 | ✅ v2 (fontes primárias + rótulos epistêmicos) |
+| [`experiments/plano-de-experimentos.md`](experiments/plano-de-experimentos.md) | Protocolo executável completo dos **Testes 1–14** (Níveis 1, 2 e 3): fórmulas de calibração ($\mu+3\sigma$, $\kappa$, $HHI$), harnesses, critérios de falha e salvaguardas | ✅ v1.0 completo |
+| [`experiments/charter-template.md`](experiments/charter-template.md) | Template jurídico-operacional de autorização formal, escopo, requisitos de comitê de ética (IRB) para HITL e condições de *kill switch* | ✅ v1.0 |
+| [`experiments/scripts/calibrate_metrics.py`](experiments/scripts/calibrate_metrics.py) | Avaliador estatístico em Python (biblioteca padrão): calcula $\mu+3\sigma$, $\text{Var}(\bar{e})$, $\kappa$ de Cohen/Fleiss, $HHI$ e valida logs JSONL | ✅ v1.0 (`--self-test` passando) |
+| [`experiments/backlog.md`](experiments/backlog.md) | Roadmap operacional dividido em Fases 0 a 5 | ✅ atualizado |
 
-## Estrutura
+---
+
+## Estrutura de Diretórios
 
 ```
 cenario-de-objetivos/
 ├── README.md
 ├── .gitignore
 ├── docs/
-│   ├── 00-ensaio-colusao-gradiente.md          # tese original: convergência de gradiente sem canal
-│   ├── 01-pesquisa-fontes.md                   # auditoria empírica (~30 papers verificados)
+│   ├── 00-ensaio-colusao-gradiente.md          # equação de variância, escopo empírico e limites
+│   ├── 01-pesquisa-fontes.md                   # revisão sistemática da literatura (~35 fontes)
 │   ├── 02-threat-model.md                      # threat model estratégico (Partes I–V, Contra-Invariantes 1–11)
-│   └── 03-kill-chain-metabolismo-agentico.md   # kill chain de 36 dias, metabolismo x402/CARBONATO (Contra-Invariantes 12–15)
+│   └── 03-kill-chain-metabolismo-agentico.md   # CARBONATO, arXiv:2606.03811, OpenClaw, x402 (Contra-Invariantes 12–15)
 └── experiments/
-    ├── plano-de-experimentos.md                # protocolo executável (Testes 1–10)
-    └── backlog.md                              # fases até o relatório
+    ├── charter-template.md                     # documento bloqueador de autorização e salvaguardas
+    ├── plano-de-experimentos.md                # protocolo executável (Testes 1–14 · v1.0)
+    ├── backlog.md                              # acompanhamento de execução (Fases 0–5)
+    └── scripts/
+        └── calibrate_metrics.py                # motor de cálculo estatístico (mu+3sigma, Kappa, HHI)
 ```
-
-## Publicar no GitHub
-
-Com [GitHub CLI](https://cli.github.com/) autenticado (`gh auth login`):
-
-```bash
-cd cenario-de-objetivos
-git init
-git add .
-git commit -m "init: threat model (Partes I–V), pesquisa verificada e protocolo de testes"
-gh repo create cenario-de-objetivos --public --source . --push
-```
-
-Sem `gh`: crie o repositório em <https://github.com/new>, depois:
-
-```bash
-cd cenario-de-objetivos
-git init
-git add . && git commit -m "init: threat model (Partes I–V)"
-git remote add origin git@github.com:<seu-usuario>/cenario-de-objetivos.git
-git branch -M main
-git push -u origin main
-```
-
-## Escopo e ética (obrigatório antes de qualquer execução)
-
-1. **Sistemas próprios apenas.** Nenhum teste deste protocolo roda contra infraestrutura de terceiros — sem essa condição, não é red team, é ataque.
-2. **Charter de autorização por escrito** antes da Fase 2 (template no backlog).
-3. **Teste 4 (HITL)** exige consentimento, escopo de identidades e *debriefing* imediato — análogo a exercícios de phishing simulado autorizados.
-4. **Testes 5 e 6** operam com poison-pill de reversão e bases efêmeras — reverta sempre, sem exceção.
-5. **Model organisms e corpora sintéticos** ficam em sandbox isolada; nada disso é publicado fora do repositório privado.
-
-## Roadmap curto
-
-- **Fase 0** — repo, charter, baseline do oráculo duplo
-- **Fase 1** — Testes 1–3 (oráculo, monocultura/κ, ingestão/FNR)
-- **Fase 2** — Testes 4–6 (HITL com IRB interno, atratores/MTTD, memória/MRR)
-- **Fase 3** — Testes 7–10 (Nível 2: SCR, PRD, VT, Δ)
-- **Fase 4** — relatório consolidado + revisão das lacunas ATLAS (H1/H2)
 
 ---
-*Classificação: Documento Estratégico de Red/Blue Team e Arquitetura de Segurança Agêntica (2026).*
+
+## Verificação Rápida do Ferramental Estatístico
+
+Para validar todas as equações do protocolo localmente (sem dependências externas):
+
+```bash
+python experiments/scripts/calibrate_metrics.py --self-test
+```
+
+Para avaliar um arquivo de resultados experimentais JSONL:
+
+```bash
+python experiments/scripts/calibrate_metrics.py --jsonl results/T1/2026-09-29-run1.jsonl
+```
+
+---
+
+## Escopo e Ética (Obrigatório Antes de Qualquer Execução)
+
+1. **Sistemas próprios apenas.** Nenhum teste deste protocolo é executado contra infraestrutura de terceiros.
+2. **Charter assinado por escrito** ([`experiments/charter-template.md`](experiments/charter-template.md)) antes do início de qualquer bateria.
+3. **Teste 4 (HITL)** exige aprovação de comitê de ética interno, escopo de identidades e *debriefing* educativo sem penalidades.
+4. **Testes 5 e 6** operam com *poison-pill* de reversão imediata e bancos vetoriais efêmeros.
+5. **Controles clássicos importam:** embora não eliminem a correlação interna $\bar{\rho}$ entre modelos, firewalls, mTLS, menor privilégio (IAM) e validação determinística continuam indispensáveis para conter o raio de explosão (*blast radius*).
+
+---
+*Classificação: Documentação Estratégica de Red/Blue Team e Arquitetura de Segurança Agêntica (Setembro de 2026).*

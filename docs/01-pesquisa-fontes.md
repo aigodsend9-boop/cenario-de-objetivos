@@ -244,6 +244,13 @@ Depois de mapear a literatura, o que **realmente** ninguém demonstrou até aqui
 - *Scaffolded Cognitive Friction* — [arXiv:2603.21735](https://arxiv.org/html/2603.21735v2)
 - *Why Model Ensembles Fail to Mitigate Systematic Bias* (inclui Kalai & Kalai, *Consensus Sampling for Safer Generative AI*) — [revisão](https://lacuna.tiptreesystems.com/direction/systematic-bias-and-correlated-errors-in-model-ensembles/txn_c72c6b0179f94368bc8776aae4f1c136)
 
+**Kill Chain Agêntico, Worms Adaptativos, CARBONATO e Trilhos Financeiros (`docs/03`)**
+- Guan, Blanchard, Foerster, Jia, Huang & Papernot (Univ. of Toronto CleverHans Lab, Vector Institute, Univ. of Cambridge, ServiceNow), *AI Agents Enable Adaptive Computer Worms*, jun/2026 — [arXiv:2606.03811](https://arxiv.org/abs/2606.03811)
+- ThreatDown / Malwarebytes (ago/2026), *CARBONATO Botnet: Docker API Exploitation and Autonomous Hermes Agent (`SOUL.md` / GH0ST) Credential Harvesting* — cobertura técnica em *BleepingComputer*, *The Hacker News* e *SecurityAffairs*
+- *Your Agent, Their Asset: A Real-World Safety Analysis of OpenClaw*, abr/2026 — [arXiv:2604.04759](https://arxiv.org/abs/2604.04759)
+- *Don't Let the Claw Grip Your Hand: A Security Analysis and Defense Framework for OpenClaw* (2026) — mapeamento de 47 cenários adversariais ao MITRE ATT&CK / ATLAS
+- Protocolo HTTP `x402` (*402 Payment Required* / liquidação on-chain em USDC para agentes) e análises de *Agent Steering* em campos `payTo` dinâmicos (2026)
+
 ---
 
-*Documento gerado em 28/09/2026 como continuação da pesquisa sobre a tese "Colusão por Convergência de Gradiente". Nenhum payload operacional de ataque é reproduzido aqui; as referências apontam para literatura pública de segurança e ciência da computação.*
+*Documento atualizado em 29/09/2026. Nenhum payload operacional de ataque é reproduzido aqui; as referências apontam para literatura pública de segurança e ciência da computação.*
