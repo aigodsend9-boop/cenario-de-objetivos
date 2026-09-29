@@ -12,8 +12,10 @@ O atacante sofisticado de 2026 não ataca o software nem o prompt — ataca a **
 
 | Documento | Descrição | Status (29/09/2026) |
 |---|---|---|
+| [`docs/00-ensaio-colusao-gradiente.md`](docs/00-ensaio-colusao-gradiente.md) | Ensaio-semente: *A Colusão por Convergência de Gradiente* — ausência de canal, infraestrutura crítica como alvo passivo (BGP/DNS/CDN) e o prompt injection inscrito nos pesos | ✅ consolidado |
 | [`docs/01-pesquisa-fontes.md`](docs/01-pesquisa-fontes.md) | Pesquisa de base com ~30 fontes verificadas: convergência sem canal, monocultura, capability paradox, homogenização, risco sistêmico | ✅ fontes verificadas |
 | [`docs/02-threat-model.md`](docs/02-threat-model.md) | Threat model completo — Partes I–V: 6 vetores (Nível 1), protocolo de testes 1–6, blueprint defensivo, mapeamento OWASP/ATLAS, Horizonte H1–H4 (Nível 2) + testes 7–10 | ✅ v2 + Parte V |
+| [`docs/03-kill-chain-metabolismo-agentico.md`](docs/03-kill-chain-metabolismo-agentico.md) | O Novo Kill Chain Agêntico (36 dias / 13 de 14 táticas ATT&CK) e Autopoiese Ofensiva: CARBONATO, Worm de Toronto, ClawHub, x402/USDC e Contra-Invariantes 12–15 | ✅ consolidado |
 | [`experiments/plano-de-experimentos.md`](experiments/plano-de-experimentos.md) | Protocolo executável dos Testes 1–10: pré-requisitos, harness, fórmulas, calibração de limiares (μ+3σ), salvaguardas, schema de registro | 🚧 v0.1 |
 | [`experiments/backlog.md`](experiments/backlog.md) | Backlog por fases (Fase 0 → primeiro relatório) | 🚧 v0.1 |
 
@@ -24,11 +26,13 @@ cenario-de-objetivos/
 ├── README.md
 ├── .gitignore
 ├── docs/
-│   ├── 01-pesquisa-fontes.md      # base empírica + referências
-│   └── 02-threat-model.md         # documento de ameaça (Partes I–V)
+│   ├── 00-ensaio-colusao-gradiente.md          # tese original: convergência de gradiente sem canal
+│   ├── 01-pesquisa-fontes.md                   # auditoria empírica (~30 papers verificados)
+│   ├── 02-threat-model.md                      # threat model estratégico (Partes I–V, Contra-Invariantes 1–11)
+│   └── 03-kill-chain-metabolismo-agentico.md   # kill chain de 36 dias, metabolismo x402/CARBONATO (Contra-Invariantes 12–15)
 └── experiments/
-    ├── plano-de-experimentos.md   # protocolo executável (Testes 1–10)
-    └── backlog.md                 # fases até o relatório
+    ├── plano-de-experimentos.md                # protocolo executável (Testes 1–10)
+    └── backlog.md                              # fases até o relatório
 ```
 
 ## Publicar no GitHub
